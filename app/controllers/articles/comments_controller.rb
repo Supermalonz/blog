@@ -1,5 +1,6 @@
-class CommentsController < ApplicationController
+class Articles::CommentsController < ApplicationController
   before_action :set_comment, only: %i[update destroy]
+  before_action :set_article, only: %i[create update new]
 
   def index
     @comments = Comment.all.page(params[:page]).per(params[:per])
@@ -10,8 +11,9 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.new(comment_params)
-    @comment.articles_id = params[:articles_id]
+    @comment = @article.comments.new(comment_params)
+    # @comment = Comment.new(comment_params)
+    # @comment.article_id = params[:article_id]
     if @comment.save
       redirect_to @comment
     else
@@ -29,9 +31,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.comments.map{ |comment| comment.delete}
     if @comment.delete
-      render status: :ok
+      redirect_to :index
     else
       render status: :bad_request
     end
@@ -40,11 +41,15 @@ class CommentsController < ApplicationController
   # Private method
   private
 
+  def set_article
+    @article = Aricle.find(params[:article_id])
+  end
+
   def set_comment
     @comment = Comment.find(params[:id])
   end
 
   def comment_params
-    params.require(:comment).permit(:content, :articles_id)
+    params.require(:comment).permit(:content, :article_id)
   end
 end

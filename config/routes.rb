@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :articles, :comments
-  # only: %i[update index create destroy]
+  resources :articles do
+    resources :comments, only: %i[new create destroy]
+  end
 
   root "articles#index"
 end
