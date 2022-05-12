@@ -16,6 +16,11 @@
   <% @comments.each do |comment| %>
     <li>
       <%= comment.title%>
+      <%= comment.body%>
     </li>
+    <%= link_to "Edit", edit_article_comment_path(@article, comment) %>
+    <%= link_to "Destroy", article_comment_path(@article, comment),
+                  method: :delete,
+                  data: { confirm: "Confirm ?" } %>
   <% end %>
 </ul>

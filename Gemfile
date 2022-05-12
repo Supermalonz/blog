@@ -45,6 +45,9 @@ gem "bootsnap", require: false
 # Use Sass to process CSS
 # gem "sassc-rails"
 
+# Spring
+gem "spring", group: :development
+
 #Dotenv
 gem 'dotenv-rails', groups: [:development, :test]
 

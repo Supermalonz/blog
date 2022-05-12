@@ -15,15 +15,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_11_024613) do
   enable_extension "plpgsql"
 
   create_table "articles", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
+    t.string "title", null: false
+    t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
+    t.string "title", default: "", null: false
+    t.text "body", default: "", null: false
     t.bigint "article_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
