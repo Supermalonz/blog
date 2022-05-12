@@ -9,3 +9,18 @@
                   data: { confirm: "Confirm ?" } %></li>
   <li><%= link_to "Back", "/articles" %></li>
 </ul>
+
+<%= link_to "New Comment", new_article_comment_path(@article) %>
+
+<ul>
+  <% @comments.each do |comment| %>
+    <li>
+      <%= comment.title%>
+      <%= comment.body%>
+    </li>
+    <%= link_to "Edit", edit_article_comment_path(@article, comment) %>
+    <%= link_to "Destroy", article_comment_path(@article, comment),
+                  method: :delete,
+                  data: { confirm: "Confirm ?" } %>
+  <% end %>
+</ul>

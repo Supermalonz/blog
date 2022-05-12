@@ -1,2 +1,3 @@
 <h1>New Article</h1>
-<%= render "form", article: @article %>
+<%= render "form", object: @article, url: articles_path %>
+<%= link_to "Back", "/articles" %>
